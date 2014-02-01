@@ -250,10 +250,19 @@
 
                 // style the element
                 $elem.css({
-                    color: color,
                     left: (x - blur) + 'px',
                     top: (y - blur) + 'px'
                 });
+                
+
+                // stops ie7 erroring
+                try {
+                    $elem.css("color", color);
+                } catch(err) {
+                    if( console && console.log )
+                        console.log( err );
+                        console.log( "Tried to set color on jquery.textshadow $elem, but there was an error. \n Maybe color 'inherit' on ie7 was used?" );
+                }
                 
                 // add in the filters
                 if (opacity < 1 || blur > 0) {
